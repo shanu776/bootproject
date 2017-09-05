@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Boot and Thymeleaf example</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
+<script type="text/javascript" th:src="@{/js/employeeAngular.js}"></script>
+<script src = "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>  
+</head>
+<body>
+<div ng-app = "" ng-controller = "employeeController">
+
+<form action="#" th:action="@{saveEmployee.html}" th:object="${employee}" method="post">
+<table>
+<tr>
+<td>Name:</td>
+<td><input type="text" name="name" ng-model="name"/>{{name}}</td>
+</tr>
+<tr>
+<td>Email:</td>
+<td><input type="text" name="email" ng-model="email"/></td>
+</tr>
+<tr>
+<td>Phone:</td>
+<td><input type="text" name="phone" ng-model="phone"/></td>
+</tr>
+<tr>
+<td>Password:</td>
+<td><input type="text" name="password" ng-model="password"/></td>
+</tr>
+<tr><td></td><td><input type="submit" value="savethroughFormAction"/></td></tr>
+</table>
+</form>
+<button ng-click="submit()">saveThroughAngular</button>
+
+<table cellspacing="3" cellpadding="3">
+<tr>
+<td>Id</td><td>Name</td><td>Email</td><td>Phone</td><td>Password</td>
+</tr>
+<tr ng-repeat="employee in employees">
+	<td>{{employee.id}}</td><td>{{employee.name}}</td><td>{{employee.email}}</td><td>{{employee.phone}}</td><td>{{employee.password}}</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

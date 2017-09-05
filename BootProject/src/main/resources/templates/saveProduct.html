@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Boot and Thymeleaf example</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>
+fieldset.scheduler-border {
+	width:50%;
+    border: solid 1px #DDD !important;
+    padding: 0 10px 10px 10px;
+    border-bottom: none;
+}
+
+legend.scheduler-border {
+    width: auto !important;
+    border: none;
+    font-size: 14px;
+}
+</style>
+<link rel="stylesheet" th:href="@{/css/style.css}"/>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+<script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
+<script type="text/javascript" th:src="@{/js/script.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+<script type="text/javascript" th:src="@{/js/angular.min.js}"></script>
+</head>
+<body>
+<div th:include="home :: header"></div>
+<h3>Product Page</h3>
+
+<form action="" th:action="@{saveProduct.html}" th:object="${product}" method="post">
+<input type="hidden" name="pid" id="pid"/>
+	<table ng-app="">
+		<tr>
+			<td><label>Product name</label></td>
+			<td><input type="text" name="product_name" id="p_name" ng-model="name"/></td><td>{{name}}</td>
+			<td id="get" th:if="${#fields.hasErrors('product_name')}" th:errors="*{product_name}"></td>
+		</tr>
+		<tr>
+			<td><label>Product type</label></td>
+			<td><input type="text" name="product_type" id="p_type"/></td>
+			<td th:if="${#fields.hasErrors('product_type')}" th:errors="*{product_type}"></td>
+		</tr>
+		<tr>
+			<td><label>Price</label></td>
+			<td><input type="text" name="product_price" id="p_price"/></td>
+			<td th:if="${#fields.hasErrors('product_price')}" th:errors="*{product_price}"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td align="center"><input type="submit" value="save"/></td>
+		</tr>
+	</table>	
+</form>
+
+<label><a href="allProductReport">AllReport</a></label>
+
+<fieldset class="scheduler-border" style="border-radius: 5px;">
+<legend class="scheduler-border" style="color: green;">ProductList</legend>
+
+<table class="table">
+<thead>
+<tr style="color: green;">
+	<th>edit</th><th>product_id</th><th>product_name</th><th>product_type</th><th>product_price</th>
+</tr>
+</thead>
+<tbody id="products">
+</tbody>
+<tr><td align="center" colspan="3"><Button id="report">GenrateReport</Button></td><td align="center" colspan="2"><Button id="delete">Delete</Button></td></tr>
+</table>
+</fieldset>
+<script type="text/javascript" th:inline="javascript">
+var error = document.getElementById("get");
+var pname = document.getElementById("p_name");
+/* pname.style.color="red";
+pname.value=error.textContent; */
+</script>
+</body>
+</html>

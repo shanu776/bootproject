@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Boot and Thymeleaf example</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>
+
+</style>
+<link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+	<h3>Spring Boot and Thymeleaf, forms</h3>
+	<form action="#" th:action="@{addCustomer.html}" th:object="${customer}" method="post">
+	<input type="hidden" name="id" th:value="${customer.id}"/>
+		<table>			
+			<tr>
+				<td>Name:</td>
+				<td><input type="text" name="name" th:value="${customer.name}" /></td>
+				<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error message</td>
+			</tr>
+			<tr>
+				<td>Email:</td>
+				<td><input type="email" name="email" th:value="${customer.email}" required="required"/></td>
+			</tr>
+			<tr>
+				<td>Phone:</td>
+				<td><input type="text" name="phone" th:value="${customer.phone}" required="required"/></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><button type="submit">Submit post</button></td>
+			</tr>
+		</table>		
+		<h2 style="color: green;" th:text="${message}"></h2>
+	</form>
+	<label><a href="customerReport.html">customerReport</a></label>
+	<label><a href="geninvoice">Invoice</a></label>
+	<fieldset><legend>CustomerData</legend>
+	<form th:action="@{deleteCustomer.html}">
+	<table>
+	<tr>
+	<th>Delete</th>
+	<th>Id</th>
+	<th>Name</th>
+	<th>Email</th>
+	<th>phone</th>	
+<!-- 	<th>edit</th> -->
+	</tr>	
+	<tr th:each="customers : ${customers}">
+	<td><input type="radio" th:name="id" th:value="${customers.id}" required="required"/></td>
+	<td align="center" th:text="${customers.id}"></td>
+	<td align="center" th:text="${customers.name}"></td>
+	<td align="center" th:text="${customers.email}"></td>
+	<td align="center" th:text="${customers.phone}"></td>
+	<!-- <td><a th:href="@{/getCustomer.html(id=${customers.id})}">edit</a></td>  -->
+	</tr>
+	<tr><td colspan="3" align="center"><input type="submit" value="delete"/></td>
+	<td colspan="3" align="center"><button th:formaction="@{getCustomer.html}">&nbsp;&nbsp;edit&nbsp;&nbsp;</button> </td></tr>
+	</table>
+	</form>
+	</fieldset>
+	<script th:inline="javascript">	
+	console.log("working");
+	var customers = [[${customers}]];
+	console.log(customers);
+	</script>
+</body>
+</html>

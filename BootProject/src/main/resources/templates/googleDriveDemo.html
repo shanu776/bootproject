@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Insert title here</title>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script async="async" defer="defer" src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+</head>
+<body>
+
+ <button id="authorize-button" style="display: none;">Authorize</button>
+ <button id="signout-button" style="display: none;">Sign Out</button>
+   
+   <form action="" th:action="@{uploadtodrive.html}" enctype="multipart/form-data">
+   <input type="file" name="file"/>
+   <input type="submit" value="upload"/>
+   </form>
+    <pre id="content"></pre>
+
+<script type="text/javascript" th:src="@{/js/drivedemo.js}"></script> 
+</body>
+</html>
